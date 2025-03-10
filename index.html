@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buat Ucapan Ulang Tahun</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    .link-container {
+      margin-top: 20px;
+      padding: 10px;
+      background: #e7f3fe;
+      border: 1px solid #b3d8ff;
+      border-radius: 4px;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Buat Ucapan Ulang Tahun</h1>
+    <form id="birthdayForm">
+      <label for="name">Nama:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="age">Umur:</label>
+      <input type="number" id="age" name="age" required min="1">
+
+      <label for="style">Pilih gaya ucapan:</label>
+      <select id="style" name="style">
+        <option value="cute">Cute</option>
+        <option value="jamet">Jamet</option>
+        <option value="lakik">Lakik</option>
+      </select>
+
+      <button type="submit">Buat Link Ucapan</button>
+    </form>
+
+    <div id="result" class="link-container" style="display:none;"></div>
+  </div>
+
+  <script>
+    document.getElementById('birthdayForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const age = document.getElementById('age').value;
+      const style = document.getElementById('style').value;
+      
+      // Buat link dengan parameter query
+      const baseUrl = window.location.origin + window.location.pathname.replace('index.html', 'greeting.html');
+      const link = baseUrl + '?name=' + encodeURIComponent(name) + '&age=' + encodeURIComponent(age) + '&style=' + encodeURIComponent(style);
+      
+      // Tampilkan link yang dihasilkan
+      const resultDiv = document.getElementById('result');
+      resultDiv.style.display = 'block';
+      resultDiv.textContent = link;
+    });
+  </script>
+</body>
+</html>
